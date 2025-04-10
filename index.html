@@ -28,11 +28,6 @@
 			}
 
 			#intro {
-				position: fixed;
-				left: 0;
-				right: 0;
-				top: 0;
-				bottom: 0;
 				width: 99vw;
 				height: 99vh;
 			}
@@ -73,6 +68,11 @@
 			<button onclick="loadVid()">Play</button>
 		</div>
 		<script>
+			const displays = document.getElementsByTagName("canvas");
+			for (const canvas of displays) {
+				canvas.style.display = "none";
+			}
+			
 			function loadVid() {
 				document.getElementById("startscreen").style.display = "none";
 				document.getElementById("intro").style.display = "unset";
@@ -81,6 +81,10 @@
 
 			function finishIntro() {
 				document.getElementById("intro").style.display = "none";
+				const displays = document.getElementsByTagName("canvas");
+				for (const canvas of displays) {
+					canvas.style.display = "unset";
+				}
 			}
 
 			document.getElementById("intro").addEventListener('ended', finishIntro);
