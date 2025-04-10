@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="generator" content="Three.js Editor">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				font-family: sans-serif;
+				font-size: 11px;
+				background-color: #000;
+				margin: 0px;
+			}
+
+			canvas {
+				display: block;
+			}
+
+			#startscreen {
+				position: fixed;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				background-image: url("bg.png");
+				background-size: cover;
+			}
+
+			#intro {
+				width: 99vw;
+				height: 99vh;
+			}
+
+			h1 {
+				text-align: center;
+				color: white;
+				font-family: monospace;
+				font-size: 50px;
+			}
+
+			button {
+				width: 200px;
+				height: 50px;
+				border: 1px solid black;
+				border-radius: 5px;
+				font-family: monospace;
+				font-size: 20px;
+				transition: all 0.5s;
+			}
+
+			button:hover {
+				background-color: rgb(21, 193, 21);
+				color: white;
+			}
+
+			h1, button {
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+			}
+		</style>
+	</head>
+	<body ontouchstart="">
+		<video style="display: none;" id="intro" src="intro.mp4" playsinline autoplay></video>
+		<div id="startscreen">
+			<h1>The Infinite Library</h1>
+			<button onclick="loadVid()">Play</button>
+		</div>
+		<script>
+			function loadVid() {
+				document.getElementById("startscreen").style.display = "none";
+				document.getElementById("intro").style.display = "unset";
+				document.getElementById("intro").play();
+			}
+
+			function finishIntro() {
+				document.getElementById("intro").style.display = "none";
+			}
+
+			document.getElementById("intro").addEventListener('ended', finishIntro);
+		</script>
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "./js/three.module.js"
+				}
+			}
+		</script>
+		<script type="module">
+
+			import * as THREE from 'three';
+			import { APP } from './js/app.js';
+
+			window.THREE = THREE; // Used by APP Scripts.
+
+			var loader = new THREE.FileLoader();
+			loader.load( 'app.json', function ( text ) {
+
+				var player = new APP.Player();
+				player.load( JSON.parse( text ) );
+				player.setSize( window.innerWidth, window.innerHeight );
+				player.play();
+
+				document.body.appendChild( player.dom );
+
+				window.addEventListener( 'resize', function () {
+
+					player.setSize( window.innerWidth, window.innerHeight );
+
+				} );
+
+			} );
+
+
+
+		</script>
+	</body>
+</html>
