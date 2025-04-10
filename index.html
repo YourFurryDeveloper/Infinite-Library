@@ -28,6 +28,11 @@
 			}
 
 			#intro {
+				position: fixed;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
 				width: 99vw;
 				height: 99vh;
 			}
@@ -70,7 +75,7 @@
 		<script>
 			function loadVid() {
 				document.getElementById("startscreen").style.display = "none";
-				document.getElementById("intro").style.display = "fixed";
+				document.getElementById("intro").style.display = "unset";
 				document.getElementById("intro").play();
 			}
 
