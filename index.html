@@ -11,7 +11,6 @@
 				font-size: 11px;
 				background-color: #000;
 				margin: 0px;
-				position: fixed;
 			}
 
 			canvas {
@@ -26,6 +25,7 @@
 				bottom: 0;
 				background-image: url("bg.png");
 				background-size: cover;
+				transition: all 1s;
 			}
 
 			#intro {
@@ -64,6 +64,8 @@
 	</head>
 	<body ontouchstart="">
 		<video style="display: none;" id="intro" src="intro.mp4" playsinline autoplay></video>
+		<audio src="walk.wav" id="walksound" playsinline></audio>
+		<!--<audio src="ambience.wav" id="walksound" playsinline loop></audio>-->
 		<div id="startscreen">
 			<h1>The Infinite Library</h1>
 			<button onclick="loadVid()">Play</button>
@@ -75,7 +77,8 @@
 			}
 			
 			function loadVid() {
-				document.getElementById("startscreen").style.display = "none";
+				document.getElementById("startscreen").style.opacity = "0";
+				//document.getElementById("startscreen").style.display = "none";
 				document.getElementById("intro").style.display = "unset";
 				document.getElementById("intro").play();
 			}
